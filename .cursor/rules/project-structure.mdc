@@ -1,0 +1,26 @@
+---
+alwaysApply: true
+---
+### Project Structure Guide (Spring Boot)
+
+- **Source code**: `src/main/java` contains application code organized by package (feature-first is preferred over strict layer-only packages).
+- **Resources**: `src/main/resources` holds `application.properties`/`application.yml`, static assets, templates, and `db` assets (e.g., Flyway/Liquibase).
+- **Tests**: `src/test/java` mirrors the main package structure; integration tests can live under `src/test/java` or `src/integrationTest/java` if configured.
+- **Entry point**: The main class is annotated with `@SpringBootApplication` and contains the `main(String[] args)` method to start the app.
+- **Configuration**: Place `@Configuration` classes under a top-level `config` package so component scanning picks them up.
+- **Domain organization**: Group by feature (e.g., `journal`, `user`, `auth`), each containing `controller`, `service`, `repository`, `model/dto`, and `mapper` subpackages when useful.
+- **Persistence**: Entities go under a `model`/`entity` package; repositories use Spring Data JPA and live in `repository`.
+
+### Build & Run
+
+- **Build tools**: The project uses Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`). Use the wrapper when present.
+- **Profiles**: Prefer Spring profiles (e.g., `dev`, `test`, `prod`) via `spring.profiles.active`.
+- **Configuration binding**: Centralize app settings using `@ConfigurationProperties` classes rather than scattering `@Value`.
+
+### Conventions
+
+- **Constructor injection** is preferred; avoid field injection.
+- **DTOs vs Entities**: Expose DTOs at the API boundary; keep entities for persistence.
+- **Global error handling**: Use `@ControllerAdvice` with `@ExceptionHandler` and return consistent error payloads.
+- **Logging**: Use SLF4J (`log.info`, `log.warn`, `log.error`) and avoid `System.out`.
+

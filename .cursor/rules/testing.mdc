@@ -1,0 +1,14 @@
+---
+globs: src/test/**
+description: Testing guidance for Spring Boot projects
+---
+### Testing Guidelines
+
+- **Frameworks**: Use JUnit 5 (`@ExtendWith(SpringExtension.class)` implicit via `spring-boot-starter-test`).
+- **Slices**: Use test slices (`@WebMvcTest`, `@DataJpaTest`) to keep tests fast; use `@SpringBootTest` when full context is required.
+- **Mocking**: Prefer `@MockBean` with slices; use Mockito or MockK (for Kotlin) for unit tests.
+- **Data**: Use Testcontainers for integration tests interacting with real databases; avoid in-memory DBs if behavior diverges.
+- **Test names**: Use descriptive method names; Given/When/Then structure.
+- **REST**: Use `MockMvc` or `WebTestClient` for controller tests; assert status and JSON content robustly.
+- **Fixtures**: Centralize builders/factories for test data to reduce duplication.
+

@@ -1,0 +1,15 @@
+---
+description: Security best practices for Spring Boot applications
+globs: src/main/**
+---
+### Security Guidelines
+
+- **Spring Security**: Centralize config in a `SecurityConfig` class using `SecurityFilterChain` bean; avoid `WebSecurityConfigurerAdapter` (deprecated).
+- **Passwords & tokens**: Never log secrets. Use strong password encoders (`BCryptPasswordEncoder`).
+- **CSRF & CORS**: Configure CSRF appropriately for stateful apps; for stateless APIs, disable CSRF and rely on tokens.
+- **JWT/OAuth2**: Validate signatures and expiration; store only minimal claims; rotate keys.
+- **Input validation**: Validate inputs with `jakarta.validation`; sanitize outputs where relevant.
+- **Headers**: Apply security headers (HSTS, X-Content-Type-Options, X-Frame-Options) via Spring Security.
+- **Error handling**: Do not leak stack traces or sensitive info in error responses.
+- **Dependencies**: Keep dependencies updated; run vulnerability scans.
+

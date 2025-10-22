@@ -1,0 +1,24 @@
+---
+globs: *.java
+description: Java coding conventions for Spring Boot projects
+---
+### Java Conventions
+
+- **Naming**: Classes use PascalCase, methods/fields use camelCase, constants are UPPER_SNAKE_CASE.
+- **Null-safety**: Prefer `Optional<T>` for return types where absence is valid; avoid using it for fields/params.
+- **Visibility**: Keep fields `private`; expose behavior via methods. Avoid public mutable fields.
+- **Records**: Use Java Records for immutable DTOs when running on Java 16+.
+- **Collections**: Return interfaces (`List`, `Set`, `Map`) and prefer immutability for outputs.
+- **Exceptions**: Throw meaningful custom exceptions; avoid generic `Exception`. Keep stacktraces with `cause`.
+- **Equals/hashCode**: For entities use identifier-based equality carefully; for value objects, use all fields.
+- **Lombok**: If used, prefer `@RequiredArgsConstructor` and `@Builder` thoughtfully; do not overuse `@Data` on entities.
+- **Formatting**: 2 or 4-space indents consistent with project settings; wrap long lines, no trailing whitespace.
+
+### Spring-specific
+
+- **Injection**: Use constructor-based dependency injection. Avoid `@Autowired` on fields; prefer final fields.
+- **Transactions**: Annotate service methods with `@Transactional` where data consistency is required.
+- **Validation**: Use `jakarta.validation` annotations on request DTOs; validate at controller level.
+- **Mapping**: Use MapStruct for complex mappings; keep mappers in `mapper` package.
+- **Logging**: Use parameterized messages (`log.info("User {} logged in", userId)`).
+

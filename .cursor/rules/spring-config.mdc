@@ -1,0 +1,20 @@
+---
+description: Guidance for Spring Boot configuration, profiles, properties, and bean management
+globs: src/main/**
+---
+### Spring Configuration
+
+- **Profiles**: Keep `application.yml` minimal; override with `application-dev.yml`, `application-test.yml`, `application-prod.yml`.
+- **Secrets**: Never commit secrets. Use environment variables or an external vault; reference with `${ENV_VAR:default}`.
+- **Property binding**: Use `@ConfigurationProperties(prefix = "app")` classes for cohesive settings and enable via `@EnableConfigurationProperties` or on the class.
+- **Bean definition**: Prefer component scanning; when using `@Bean`, keep factory methods small and deterministic.
+- **CORS**: Centralize CORS in a `WebMvcConfigurer` bean; avoid per-controller CORS unless necessary.
+- **ObjectMapper**: Configure a singleton `ObjectMapper` via `Jackson2ObjectMapperBuilder` bean if customization is needed.
+- **Clock**: Expose a `Clock` bean for time; inject it instead of calling `Instant.now()` directly.
+
+### Persistence & Migrations
+
+- **JPA**: Disable `spring.jpa.hibernate.ddl-auto` in production; use migrations.
+- **Migrations**: Use Flyway or Liquibase under `src/main/resources/db/migration` or `db/changelog`.
+- **Naming**: Prefer snake_case table/column names; set Hibernate naming strategies accordingly.
+
