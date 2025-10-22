@@ -41,7 +41,7 @@ public class UserController {
         userInDB.setPassword(user.getPassword());
         userService.saveEntry(userInDB);
         return new ResponseEntity<>(userInDB, HttpStatus.NO_CONTENT);
-    }
+    } 
 
     @DeleteMapping
     public ResponseEntity<?> deleteUserById(){
